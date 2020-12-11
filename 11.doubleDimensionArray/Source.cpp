@@ -41,6 +41,15 @@ bool checkingRowsEquality(int[][cols], size_t, size_t);
 bool checkingColsEquality(int[][cols], size_t, size_t);
 bool checkingDiagonalsEquality(int[][cols], size_t, size_t);
 
+// 1. Get product of elements in each column.
+// 2. Get sum of elements **above main** diagonal.
+// 3. Get sum of elements **below side** diagonal.
+// 4. Get product of elements in each row. Change places rows with **max** and **min** values of product.
+// 5. Determine columns and rows that **does not** contain negative elements.
+// 6. Fill main diagonals with zeros.
+// 7. Sort elements of each row with **insert sort**, **binary search** element in each row.
+// 8. Determine number of max and min elements in an array. The same on diagonals. Sum found mins and maxs.
+// 9. Determine if a square matrix is a magic square.
 
 int main()
 {
@@ -49,7 +58,8 @@ int main()
 	int A[rows][cols];
 	int arr[rows];
 	srand(time(0));
-	//1. Вычислить произведение чисел в каждом столбце.
+	
+	// 1. Get product of elements in each column.
 	initMatrixAuto(A, rows, cols, 10);
 	printMatrix(A, rows, cols);
 	std::cout << "\n";
@@ -69,35 +79,35 @@ int main()
 	}
 	std::cout << std::endl;
 
-	//2. Вычислить сумму элементов матрицы, которые расположены выше главной диагонали.
+	// 2. Get sum of elements **above main** diagonal.
 	std::cout << "Sum of upper elements is: " << _2_upperDiagonalSum(A, rows, cols) << "\n";
-	//3. Вычислить сумму элементов матрицы, которые расположены ниже побочной диагонали матрицы.
+	
+	// 3. Get sum of elements **below side** diagonal.
 	std::cout << "Sum of lower elements is: " << _3_lowerDiagonalSum(A, rows, cols) << "\n";
-	//4.Вычислить произведение элементов для каждой строки.
-	//Поменять местами строки с максимальным и минимальным значением произведения.
+	
+	// 4. Get product of elements in each row. Change places rows with **max** and **min** values of product.
 	_4_swapMaxAndMinRow(A, rows, cols, arr);
 	printMatrix(A, rows, cols);
 	std::cout << "\n";
-	//5. Определите  столбцы и  строки массива, в которых не содержится ни одного отрицательного элемента.
-	//Выведите на экран найденные индексы строк и столбцов.
+	
+	// 5. Determine columns and rows that **does not** contain negative elements.
 	std::cout << "Indexes of rows and cols without negative elements are: \n";
 	_5_positivRowsAndCols(A, rows, cols);
 	std::cout << "\n\n";
-	//6. Заполните главные диагонали массива нулями.
+	
+	// 6. Fill main diagonals with zeros.
 	_6_diagonalsToNulls(A, rows, cols);
 	printMatrix(A, rows, cols);
 	std::cout << "\n";
-	//7. Отсортировать методом вставок элементы в каждой строке, методом бинарного поиска найти в каждой строке заданный 
-	//элемент и вывести на экран.
+	
+	// 7. Sort elements of each row with **insert sort**, **binary search** element in each row.
 	std::cout << "Enter key:\n";
 	std::cin >> key;
 	_7_matrixSortAndSearch(A, rows, cols, key);
 	printMatrix(A, rows, cols);
 	std::cout << "\n";
-	//8. Найти количество минимальных и максимальных элементов массива.
-	//Найти количество минимальных и максимальных элементов на главных диагоналях. Сложить найденные минимумы и максимумы.
-	//Отобразить исходный массив, минимальный элемент массива, максимальный элемент массива, 
-	//минимумы, максимумы диагоналей, их позиции и суммы.
+	
+	// 8. Determine number of max and min elements in an array. The same on diagonals. Sum found mins and maxs.
 	std::cout << "Min matrix element is: " << minMatrixElement(A, rows, cols) << "\n";
 	std::cout << "Max matrix element is: " << maxMatrixElement(A, rows, cols) << "\n";
 	std::cout << "Sum of min and max elements is " << minMatrixElement(A, rows, cols) * numOfMinElements(A, rows, cols) + maxMatrixElement(A, rows, cols) * numOfMaxElements(A, rows, cols) << "\n";
@@ -108,9 +118,8 @@ int main()
 	std::cout << "Index of max element is: " << "[" << rowIndexOfMaxDiagonalsElement(A, rows, cols) << "]" << "[" << colIndexOfMaxDiagonalsElement(A, rows, cols) << "]" << "\n";
 	std::cout << "Sum of min and max diagonals elements is: " << A[rowIndexOfMinDiagonalsElement(A, rows, cols)][colIndexOfMinDiagonalsElement(A, rows, cols)] + A[rowIndexOfMaxDiagonalsElement(A, rows, cols)][colIndexOfMaxDiagonalsElement(A, rows, cols)] << "\n";
 	std::cout << "There are " << numOfMinAndMaxElementsOnMainDiagonals(A, rows, cols) << " min and max matrix elements on the main diagonals.\n";
-	//Определить является ли квадратная матрица магическим квадратом. Матрица называется магическим квадратом,
-	//если сумма элементов каждой строки равна сумме элементов каждого столбца и равна сумме элементов 
-	//стоящих на диагоналях.
+	
+	// 9. Determine if a square matrix is a magic square.
 	if (checkingRowsEquality(A, rows, cols) == checkingColsEquality(A, rows, cols) == checkingDiagonalsEquality(A, rows, cols))
 		std::cout << "This matrix is the magic square.\n";
 	else std::cout << "This matrix is NOT the magic square.\n";
